@@ -1,33 +1,43 @@
+//Challenge 4: Guess the number Game.
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-//A simple C Program game to guess the number.
+#include <time.h> // for random number generator seed
+
 int main()
 {
-    int number, guess, n_guess_attemps = 1;
-    srand(time(0));
-    number = rand() % 10 + 1; //Genrate a random number b/w 1 to 10
-    // printf("\nThe number is %d.\n", number);
-    do
+    int randomNumber = 0;
+    int guess = 0;
+    int numberOfGuesses;
+    time_t t;
+
+    // Initialization of random number generator
+    srand((unsigned)time(&t));
+
+    // get the random number
+    randomNumber = rand() % 21;
+
+    printf("\nThis is a guessing game.");
+    printf("\nI have chosen a number between 0 and 20, which you must guess. \n");
+
+    for (numberOfGuesses = 5; numberOfGuesses > 0; --numberOfGuesses)
     {
-        printf("\nGuess the number b/w 1 to 10: ");
+        printf("\nYou have %d tr%s left.", numberOfGuesses, numberOfGuesses == 1 ? "y" : "ies");
+        printf("\nEnter a guess: ");
         scanf("%d", &guess);
 
-        if (guess > number)
+        if (guess == randomNumber)
         {
-            printf("Lower number please!\n");
+            printf("\nCongratulations.  You guessed it!\n");
+            return;
         }
-        else if (guess < number)
-        {
-            printf("Higher number please!\n");
-        }
-        else
-        {
-            printf("You guessed it in %d attempts\n", n_guess_attemps);
-        }
-        n_guess_attemps++;
-
-    } while (guess != number);
+        else if (guess < 0 || guess > 20) // checking for an invalid guess
+            printf("I said the number is between 0 and 20.\n");
+        else if (randomNumber > guess)
+            printf("Sorry, %d is wrong.  My number is greater than that.\n", guess);
+        else if (randomNumber < guess)
+            printf("Sorry, %d is wrong.  My number is less than that.\n", guess);
+    }
+    printf("\nYou have had five tries and failed. The number was %d\n", randomNumber);
 
     return 0;
 }
