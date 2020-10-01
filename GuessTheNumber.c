@@ -27,15 +27,15 @@ int main()
 
         if (guess == randomNumber)
         {
-            printf("\nCongratulations.  You guessed it!\n");
+            printf("\nCongratulations!You guessed it.\n");
             return 0;
         }
         else if (guess < 0 || guess > 20) // checking for an invalid guess
             printf("I said the number is between 0 and 20.\n");
         else if (randomNumber > guess)
-            printf("Sorry, %d is wrong.  My number is greater than that.\n", guess);
+            printf("Sorry, %d is wrong. My number is greater than that.\n", guess);
         else if (randomNumber < guess)
-            printf("Sorry, %d is wrong.  My number is less than that.\n", guess);
+            printf("Sorry, %d is wrong. My number is less than that.\n", guess);
     }
     printf("\nYou have had five tries and failed. The number was %d\n", randomNumber);
 
